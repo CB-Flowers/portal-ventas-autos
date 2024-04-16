@@ -1,0 +1,73 @@
+<main>
+  <div class="text-center">
+    <img class="d-block mx-auto mb-4"
+         src="https://w7.pngwing.com/pngs/458/959/png-transparent-computer-icons-management-marketing-client-icon-text-logo-psychology.png"
+         alt="" height="75">
+    <h2>{{ tituloPagina }}</h2>
+    <p class="lead">Complete el formulario</p>
+  </div>
+
+  <div class="row g-5">
+    <div class="col-md-12 col-lg-12">
+      <h4 class="mb-3">Datos Personales</h4>
+      <form [formGroup]="clienteForm" (submit)="onSubmit()">
+
+        <div class="mb-3 row">
+          <input type="text" placeholder="NOMBRE" class="form-control w-20" formControlName="nombre"
+                 [ngClass]="{'is-invalid': clienteForm.get('nombre')?.invalid && clienteForm.get('nombre')?.touched}">
+          <span *ngIf="clienteForm.get('nombre')?.invalid && clienteForm.get('nombre')?.touched" class="text-danger">Este campo es necesario y debe tener mínimo 3 caracteres</span>
+        </div>
+
+        <div class="mb-3 row">
+          <input type="text" placeholder="APELLIDO" class="form-control w-20" formControlName="apellido"
+                 [ngClass]="{'is-invalid': clienteForm.get('apellido')?.invalid && clienteForm.get('apellido')?.touched}">
+          <span *ngIf="clienteForm.get('apellido')?.invalid && clienteForm.get('apellido')?.touched"
+                class="text-danger">Este campo es necesario y debe tener mínimo 3 caracteres</span>
+        </div>
+
+        <div class="mb-3 row">
+          <input type="password" placeholder="CONTRASEÑA" class="form-control w-20" formControlName="password"
+                 [ngClass]="{'is-invalid': clienteForm.get('password')?.invalid && clienteForm.get('password')?.touched}">
+        </div>
+
+        <div class="mb-3">
+          <input placeholder="checkbox" type="checkbox" formControlName="quiereContacto" (change)="toggleContacto()">
+          ¿Deseas ser contactado por un asesor?
+        </div>
+
+        <div class="card-body">
+
+          <div class="row" *ngIf="clienteForm.value.quiereContacto">
+
+            <input type="email" placeholder="CORREO ELECTRÓNICO" class="form-control w-20" formControlName="email"
+                   aria-describedby="correoHelp">
+            <div id="correoHelp" class="form-text">Su email no será compartido con nadie.</div>
+            <span
+              *ngIf="clienteForm.get('email')?.invalid && clienteForm.get('email')?.touched && clienteForm.value.quiereContacto"
+              class="text-danger">Este campo es obligatorio</span>
+            <br>
+
+            <input type="number" placeholder="TELEFONO" class="form-control W-20" formControlName="telefono"
+                   aria-describedby="telefonoHelp">
+            <div id="telefonoHelp" class="form-text">Su número no será compartido con nadie.</div>
+            <span
+              *ngIf="clienteForm.get('telefono')?.invalid && clienteForm.get('telefono')?.touched && clienteForm.value.quiereContacto"
+              class="text-danger">Este campo es obligatorio</span>
+
+          </div>
+        </div>
+        <br>
+        <div class="d-flex gap-2 justify-content-center py-5">
+          <button class="btn btn-primary d-inline-flex align-items-center" type="button" type="submit" (click)="guardarCliente()">
+            REGISTRAR
+          </button>
+          <button class="btn btn-outline-secondary d-inline-flex align-items-center" (click)="goInicio()">
+            Volver a Home
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</main>
+
